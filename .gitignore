@@ -1,0 +1,12 @@
+.idea/
+*.iml
+
+driver_exe/
+!*.md
+
+logs/*
+*.log
+*.txt
+*.csv
+
+__pycache__

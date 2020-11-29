@@ -1,0 +1,23 @@
+version: 1
+formatters:
+  simple:
+    format: '%(asctime)s %(levelname)-5s %(filename)-15.15s --- %(message)s'
+    datefmt: '%Y-%m-%d %H:%M:%S'
+handlers:
+  console:
+    class: logging.StreamHandler
+    level: INFO
+    formatter: simple
+    stream: ext://sys.stdout
+  info_file_handler:
+    class: logging.handlers.TimedRotatingFileHandler
+    level: DEBUG
+    formatter: simple
+    filename: logs/app.log
+    interval: 3
+    when: 'D'
+    backupCount: 3
+    encoding: utf8
+root:
+  level: DEBUG
+  handlers: [console, info_file_handler]
