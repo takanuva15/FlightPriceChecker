@@ -2,7 +2,9 @@ import datetime
 import logging as logger
 import os
 import re
+import sys
 
+from pyvirtualdisplay import Display
 from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.support import expected_conditions as EC
@@ -26,7 +28,15 @@ class GoogleFlightsScraper(object):
         self.url = url
 
         script_dir = os.path.realpath('')
-        driver_exe_path = os.path.join(script_dir, 'driver_exe', 'chromedriver.exe')
+        driver_exe_path = os.path.join(script_dir, 'driver_exe', 'chromedriver')
+        if sys.platform.startswith('win32'):
+            driver_exe_path += '.exe'
+
+        self.display_for_linux = None
+        if sys.platform.startswith('linux'):
+            self.display_for_linux = Display(visible=0, size=(1920, 1080))
+            self.display_for_linux.start()
+
         self.driver = WebDriverUtils.start_new_chrome_browser(driver_exe_path)
         logger.info('Google Flights Scraper initialized. Browser started.')
         self.driver_wait = WebDriverWait(self.driver, 10)
@@ -71,6 +81,8 @@ class GoogleFlightsScraper(object):
 
     def close_browser(self):
         self.driver.quit()
+        if self.display_for_linux is not None:
+            self.display_for_linux.stop()
         logger.info('Closed the browser')
 
 

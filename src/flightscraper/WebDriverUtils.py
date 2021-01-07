@@ -16,6 +16,9 @@ def start_new_chrome_browser(driver_exe_path: str) -> WebDriver:
         options.add_experimental_option('detach', True)
     else:
         options.add_argument("headless")
+        options.add_argument("--no-sandbox")
+        options.add_argument("--disable-dev-shm-usage")
+
     driver = webdriver.Chrome(executable_path=driver_exe_path, chrome_options=options)
 
     if __debug__ and len(pyglet.canvas.get_display().get_screens()) == 2:
