@@ -19,3 +19,11 @@ class FlightQuery:
 
     def __repr__(self):
         return str(self.__dict__)
+
+    @property
+    def travel_path(self):
+        return self.dep_airport + '2' + self.arrival_airport
+
+    @property
+    def dep_date_fo_str(self):
+        return self.dep_date.strftime('%Y-%m-%d')
