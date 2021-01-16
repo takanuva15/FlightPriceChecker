@@ -19,3 +19,4 @@ In that text file, add a single line with the date you have booked in `YYYY-MM-D
 ### Requirements:
 - Python 3.9+ 
 - Must install all the relevant libraries used within the various `.py` files.
+  - `pip3 install pandas pyvirtualdisplay selenium pyglet prettytable` 

@@ -69,7 +69,7 @@ class GoogleFlightsScraper(object):
             )
             logger.debug(f"Found '{header_label}' label")
             all_flights_elements: list[WebElement] = all_flights_header.find_elements_by_xpath(
-                "./../../../following-sibling::div//ol/li[@data-id]"
+                "./../../../following-sibling::div//div[@role='listitem']"
             )
             logger.info(f"Found %d flights listed under '{header_label}'", len(all_flights_elements))
             for flight in all_flights_elements:
